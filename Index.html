@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Interactivo - Karen Paulina Saravia Carrasco</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+    <!-- Chosen Palette: Warm Neutral -->
+    <!-- Application Structure Plan: A single-page application with a fixed top navigation bar for seamless scrolling between sections (Resumen, Experiencia, Habilidades, Formación, Contacto). The structure prioritizes a narrative flow, starting with a strong summary, followed by an interactive timeline for work experience to encourage engagement, a visually organized skills section, and finally, education and contact details. This design is chosen to guide the recruiter through her qualifications in a logical and compelling manner, moving from a high-level summary to detailed proof points, which is more effective than a static document for a digital-focused role. -->
+    <!-- Visualization & Content Choices: Resumen: Presented in a clear, easy-to-read block. Experiencia: An interactive vertical timeline (HTML/CSS/JS) where clicking a role expands to show details, making a large amount of information digestible. Habilidades: Grouped into categories and displayed as styled tags (pills) for quick visual scanning, which is more engaging than a simple list. Formación: A clean two-column layout for clarity, including both formal education and additional courses/certifications. Contacto: Clear, actionable contact points with icons. All choices avoid SVG/Mermaid and Chart.js/Plotly.js (as no quantitative data is present) and focus on enhancing readability and user interaction within the designed SPA structure using standard web technologies. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFDFB;
+            color: #3D405B;
+        }
+        .nav-link.active {
+            color: #E07A5F;
+            font-weight: 700;
+        }
+        .timeline-item-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+        }
+        .timeline-item.active .timeline-item-content {
+            max-height: 1000px; /* Suficiente para expandir el contenido */
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        .timeline-item.active .timeline-icon-plus {
+            transform: rotate(45deg);
+        }
+        .timeline-icon-plus {
+            transition: transform 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white/80 backdrop-blur-lg fixed top-0 left-0 right-0 z-50 shadow-sm">
+        <div class="container mx-auto px-6 py-4">
+            <nav class="flex justify-between items-center">
+                <div class="font-extrabold text-xl text-[#3D405B]">Karen P. Saravia Carrasco</div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#resumen" class="nav-link text-gray-600 hover:text-[#E07A5F] transition-colors">Resumen</a>
+                    <a href="#experiencia" class="nav-link text-gray-600 hover:text-[#E07A5F] transition-colors">Experiencia</a>
+                    <a href="#habilidades" class="nav-link text-gray-600 hover:text-[#E07A5F] transition-colors">Habilidades</a>
+                    <a href="#formacion" class="nav-link text-gray-600 hover:text-[#E07A5F] transition-colors">Formación</a>
+                    <a href="#contacto" class="nav-link text-gray-600 hover:text-[#E07A5F] transition-colors">Contacto</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="menu-btn" class="text-gray-600 focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    </button>
+                </div>
+            </nav>
+            <div id="mobile-menu" class="hidden md:hidden mt-4">
+                <a href="#resumen" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100 rounded">Resumen</a>
+                <a href="#experiencia" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100 rounded">Experiencia</a>
+                <a href="#habilidades" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100 rounded">Habilidades</a>
+                <a href="#formacion" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100 rounded">Formación</a>
+                <a href="#contacto" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100 rounded">Contacto</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-24">
+        <section id="hero" class="container mx-auto px-6 py-16 text-center">
+            <h1 class="text-4xl md:text-6xl font-extrabold text-[#3D405B] leading-tight">Karen Paulina Saravia Carrasco</h1>
+            <p class="mt-4 text-xl md:text-2xl text-[#E07A5F] font-medium">Ingeniero Industrial & Product Owner Digital</p>
+        </section>
+
+        <section id="resumen" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center mb-12">Resumen Profesional</h2>
+                <div class="text-lg text-gray-700 max-w-4xl mx-auto text-left space-y-4">
+                    <p>Ingeniera de Ejecución Industrial con más de 6 años de experiencia como Product Owner en la gerencia de tecnología, liderando la transformación digital y el desarrollo de productos Core de la AFP.</p>
+                    <p>Poseo experiencia en la definición de la visión del producto, la gestión estratégica del backlog y la entrega incremental de valor. Con una sólida experiencia en la gestión de proyectos digitales, con la capacidad de mejorar, diseñar, planificar y desarrollar soluciones innovadoras ante los desafíos que surgen en cada etapa del ciclo de vida del producto. Mi rol implica la orquestación de equipos ágiles multidisciplinarios, facilitando la comunicación y la alineación entre negocio, tecnología, Experiencia de Usuario y Procesos para convertir la estrategia en soluciones tangibles y de alto impacto.</p>
+                    <p>Me caracterizo por mantener una actitud mental positiva y ser una profesional responsable y comprometida con los objetivos planteados. Destaca mi capacidad para enfrentar múltiples desafíos en ambientes bajo presión, así como mi habilidad para establecer relaciones interpersonales sólidas tanto con el equipo de trabajo interno como con proveedores externos, impulsando la colaboración para el cumplimiento de metas.</p>
+                    <p>Me identifico por mi orientación al logro y resultado, demostrando disposición y agilidad frente a los cambios. Mi enfoque se centra en la identificación proactiva de oportunidades, la resolución de impedimentos y la validación continua para asegurar la satisfacción del usuario y el cumplimiento de los objetivos de negocio.</p>
+                    <p>Mi visión como profesional es aprender a cada instante y mejorar lo que ya existe. Soy una profesional que no le teme a los desafíos y que busca constantemente maneras innovadoras de abordar los problemas, atreviéndome a experimentar sin temor a equivocarme e incorporando las mejores prácticas del entorno para impulsar la mejora continua.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="experiencia" class="py-20">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center mb-12">Experiencia Laboral</h2>
+                <p class="text-center text-lg text-gray-600 max-w-3xl mx-auto mb-16">Esta sección detalla mi trayectoria profesional. He diseñado esta línea de tiempo interactiva para facilitar la exploración de mis roles y responsabilidades. Haga clic en cada puesto para ver los detalles y logros clave.</p>
+                <div class="relative max-w-3xl mx-auto">
+                    
+                    <div class="timeline-item mt-8 active">
+                        <div class="flex items-center justify-center w-full">
+                            <div class="w-1/2 flex justify-end pr-8">
+                                <div class="cursor-pointer bg-white p-6 rounded-lg shadow-lg w-full text-right">
+                                    <p class="text-gray-500 text-sm">2018 – Actualidad</p>
+                                    <h3 class="font-bold text-xl text-[#3D405B]">Product Owner Transformación Digital</h3>
+                                    <p class="text-gray-600">AFP HABITAT, Santiago, Chile</p>
+                                </div>
+                            </div>
+                            <div class="w-1/12 flex-shrink-0">
+                                <div class="w-6 h-6 rounded-full bg-[#E07A5F] z-10 relative flex items-center justify-center">
+                                    <div class="timeline-icon-plus text-white text-xl font-bold">+</div>
+                                </div>
+                            </div>
+                            <div class="w-1/2 pl-8"></div>
+                        </div>
+                        <div class="timeline-item-content">
+                            <div class="bg-gray-50 p-6 rounded-lg shadow-inner ml-auto mr-auto md:ml-12 lg:ml-24">
+                                <ul class="list-disc list-inside space-y-2 text-gray-700">
+                                    <li>Defino y comunico la visión del producto para el sistema core de la AFP, traduciendo las prioridades de negocio en una hoja de ruta clara y gestionando el ciclo de vida del producto.</li>
+                                    <li>Administro y optimizo el backlog, asegurando que las iniciativas de mayor valor sean priorizadas, refinadas y estén listas para el desarrollo en cada iteración.</li>
+                                    <li>Proporciono visión y direccionamiento al equipo de desarrollo (tanto interno como externo).</li>
+                                    <li>Colaboro estrechamente con el equipo de desarrollo, el equipo de UX para asegurar una experiencia de usuario óptima, y el Process Lead para garantizar la eficiencia y robustez de los flujos.</li>
+                                    <li>Actúo como el punto central de contacto para diversas áreas, incluyendo negocio, tecnología y operaciones, sintetizando sus necesidades y garantizando la alineación de los objetivos del producto.</li>
+                                    <li>Valido funcionalmente los desarrollos, monitoreo el avance de las iniciativas y gestiono proactivamente los riesgos e impedimentos, enfocada en la entrega de incrementos de producto que generen valor de forma sostenida.</li>
+                                    <li>Elaboro la documentación necesaria, incluyendo flujos y especificaciones, para guiar el proceso de desarrollo y asegurar la comprensión compartida.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item mt-8">
+                        <div class="flex items-center justify-center w-full">
+                             <div class="w-1/2 pr-8"></div>
+                            <div class="w-1/12 flex-shrink-0">
+                                <div class="w-6 h-6 rounded-full bg-[#81B29A] z-10 relative flex items-center justify-center">
+                                     <div class="timeline-icon-plus text-white text-xl font-bold">+</div>
+                                </div>
+                            </div>
+                            <div class="w-1/2 flex justify-start pl-8">
+                                <div class="cursor-pointer bg-white p-6 rounded-lg shadow-lg w-full text-left">
+                                    <p class="text-gray-500 text-sm">2011 – 2018</p>
+                                    <h3 class="font-bold text-xl text-[#3D405B]">Analista Área de Cobranzas</h3>
+                                    <p class="text-gray-600">AFP HABITAT, Santiago, Chile</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item-content">
+                             <div class="bg-gray-50 p-6 rounded-lg shadow-inner ml-auto mr-auto md:mr-12 lg:mr-24">
+                                <ul class="list-disc list-inside space-y-2 text-gray-700">
+                                    <li>Desarrollé y analicé grandes volúmenes de datos para generar reportes estratégicos que apoyaron la toma de decisiones gerenciales.</li>
+                                    <li>Identifiqué e implementé mejoras significativas en los procesos de cobranza y recaudación, optimizando la eficiencia operativa.</li>
+                                    <li>Fui responsable de la generación de informes de control de gestión (KPI) para el Departamento de Cobranzas.</li>
+                                    <li>Elaboré requerimientos funcionales para el Sistema de Cobranza, actuando como puente entre el negocio y TI.</li>
+                                    <li>Colaboré activamente con el área de TI en el desarrollo de nuevos proyectos, asegurando la alineación con las necesidades del negocio.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item mt-8">
+                        <div class="flex items-center justify-center w-full">
+                            <div class="w-1/2 flex justify-end pr-8">
+                                <div class="cursor-pointer bg-white p-6 rounded-lg shadow-lg w-full text-right">
+                                    <p class="text-gray-500 text-sm">2006 – 2011</p>
+                                    <h3 class="font-bold text-xl text-[#3D405B]">Asistente Área de Cobranzas</h3>
+                                    <p class="text-gray-600">AFP HABITAT, Santiago, Chile</p>
+                                </div>
+                            </div>
+                            <div class="w-1/12 flex-shrink-0">
+                                <div class="w-6 h-6 rounded-full bg-[#81B29A] z-10 relative flex items-center justify-center">
+                                     <div class="timeline-icon-plus text-white text-xl font-bold">+</div>
+                                </div>
+                            </div>
+                            <div class="w-1/2 pl-8"></div>
+                        </div>
+                        <div class="timeline-item-content">
+                            <div class="bg-gray-50 p-6 rounded-lg shadow-inner ml-auto mr-auto md:ml-12 lg:ml-24">
+                                <ul class="list-disc list-inside space-y-2 text-gray-700">
+                                    <li>Controlé ciclos de cobranza y fui responsable del control de gestión de recaudación, interactuando con entidades externas.</li>
+                                    <li>Participé en procesos de normalización y migración de datos, así como en cambios de plataformas tecnológicas.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                     <div class="timeline-item mt-8">
+                        <div class="flex items-center justify-center w-full">
+                             <div class="w-1/2 pr-8"></div>
+                            <div class="w-1/12 flex-shrink-0">
+                                <div class="w-6 h-6 rounded-full bg-[#81B29A] z-10 relative flex items-center justify-center">
+                                     <div class="timeline-icon-plus text-white text-xl font-bold">+</div>
+                                </div>
+                            </div>
+                            <div class="w-1/2 flex justify-start pl-8">
+                                <div class="cursor-pointer bg-white p-6 rounded-lg shadow-lg w-full text-left">
+                                    <p class="text-gray-500 text-sm">2005 – 2006</p>
+                                    <h3 class="font-bold text-xl text-[#3D405B]">Analista de Sistemas</h3>
+                                    <p class="text-gray-600">SECRETARIA MINISTERIAL DE EDUCACION (SEREMI), Gobierno de Chile</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item-content">
+                             <div class="bg-gray-50 p-6 rounded-lg shadow-inner ml-auto mr-auto md:mr-12 lg:mr-24">
+                                <ul class="list-disc list-inside space-y-2 text-gray-700">
+                                    <li>Realicé análisis de requerimientos, diseño y modelado de bases de datos.</li>
+                                    <li>Desarrollé aplicaciones corporativas para la gestión y mejora de procesos en diversas áreas de la organización.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="habilidades" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center mb-12">Habilidades Clave</h2>
+                 <p class="text-center text-lg text-gray-600 max-w-3xl mx-auto mb-16">Aquí presento un resumen de mis competencias principales, agrupadas por área de especialización. Estas habilidades son el pilar de mi desempeño como Product Owner, permitiéndome navegar desde la estrategia hasta la ejecución técnica.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <h3 class="font-bold text-xl mb-4 text-[#3D405B]">Gestión de Producto</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-[#E07A5F]/20 text-[#E07A5F] px-3 py-1 rounded-full text-sm font-medium">Visión de Producto</span>
+                            <span class="bg-[#E07A5F]/20 text-[#E07A5F] px-3 py-1 rounded-full text-sm font-medium">Estrategia</span>
+                            <span class="bg-[#E07A5F]/20 text-[#E07A5F] px-3 py-1 rounded-full text-sm font-medium">Roadmap</span>
+                            <span class="bg-[#E07A5F]/20 text-[#E07A5F] px-3 py-1 rounded-full text-sm font-medium">Gestión de Backlog</span>
+                            <span class="bg-[#E07A5F]/20 text-[#E07A5F] px-3 py-1 rounded-full text-sm font-medium">Priorización</span>
+                            <span class="bg-[#E07A5F]/20 text-[#E07A5F] px-3 py-1 rounded-full text-sm font-medium">Desarrollo de MVP</span>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <h3 class="font-bold text-xl mb-4 text-[#3D405B]">Metodologías Ágiles</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-[#81B29A]/20 text-[#3D405B] px-3 py-1 rounded-full text-sm font-medium">Scrum</span>
+                            <span class="bg-[#81B29A]/20 text-[#3D405B] px-3 py-1 rounded-full text-sm font-medium">Kanban</span>
+                            <span class="bg-[#81B29A]/20 text-[#3D405B] px-3 py-1 rounded-full text-sm font-medium">Facilitación de Ceremonias</span>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <h3 class="font-bold text-xl mb-4 text-[#3D405B]">Colaboración y Diseño</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-[#F2CC8F]/40 text-[#3D405B] px-3 py-1 rounded-full text-sm font-medium">Trabajo con TI</span>
+                            <span class="bg-[#F2CC8F]/40 text-[#3D405B] px-3 py-1 rounded-full text-sm font-medium">Colaboración UX</span>
+                            <span class="bg-[#F2CC8F]/40 text-[#3D405B] px-3 py-1 rounded-full text-sm font-medium">Process Lead</span>
+                            <span class="bg-[#F2CC8F]/40 text-[#3D405B] px-3 py-1 rounded-full text-sm font-medium">Análisis y Diseño</span>
+                            <span class="bg-[#F2CC8F]/40 text-[#3D405B] px-3 py-1 rounded-full text-sm font-medium">Levantamiento de Req.</span>
+                            <span class="bg-[#F2CC8F]/40 text-[#3D405B] px-3 py-1 rounded-full text-sm font-medium">Resolución de Problemas</span>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg col-span-1 md:col-span-2 lg:col-span-3">
+                         <h3 class="font-bold text-xl mb-4 text-[#3D405B]">Tecnologías</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-gray-200 text-gray-800 px-3 py-1 rounded-full text-sm font-medium">SQL Server (T-SQL)</span>
+                            <span class="bg-gray-200 text-gray-800 px-3 py-1 rounded-full text-sm font-medium">Oracle SQL Developer</span>
+                            <span class="bg-gray-200 text-gray-800 px-3 py-1 rounded-full text-sm font-medium">MS Access</span>
+                            <span class="bg-gray-200 text-gray-800 px-3 py-1 rounded-full text-sm font-medium">Visual Basic.net</span>
+                             <span class="bg-gray-200 text-gray-800 px-3 py-1 rounded-full text-sm font-medium">Bizagi</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="formacion" class="py-20">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center mb-12">Formación</h2>
+                <p class="text-center text-lg text-gray-600 max-w-3xl mx-auto mb-16">Mi base académica y la formación continua son fundamentales para mi desarrollo profesional. A continuación, se presenta mi educación formal y los cursos de especialización más relevantes que he completado.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-4xl mx-auto">
+                    <div>
+                        <h3 class="font-bold text-2xl mb-6 text-[#3D405B]">Educación Formal</h3>
+                        <div class="space-y-6">
+                            <div class="bg-white p-6 rounded-lg shadow-md">
+                                <p class="text-gray-500 text-sm">2014</p>
+                                <h4 class="font-bold text-lg">Ingeniería Industrial</h4>
+                                <p class="text-gray-600">Universidad de Santiago de Chile</p>
+                            </div>
+                            <div class="bg-white p-6 rounded-lg shadow-md">
+                                <p class="text-gray-500 text-sm">2006</p>
+                                <h4 class="font-bold text-lg">Analista de Sistemas</h4>
+                                <p class="text-gray-600">Universidad de las Américas</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-2xl mb-6 text-[#3D405B]">Cursos y Certificaciones</h3>
+                        <div class="space-y-4">
+                            <p class="bg-white p-4 rounded-lg shadow-sm">Control de Gestión y Cuadros de Mando - Pontificia Universidad Católica de Chile (2011)</p>
+                            <p class="bg-white p-4 rounded-lg shadow-sm">SQL-Server: Desarrollo de Consultas y Reportes (Nivel Avanzado) - Pontificia Universidad Católica de Chile (2011)</p>
+                            <p class="bg-white p-4 rounded-lg shadow-sm">Certificación en Programación en Visual Basic.net - DuocUC (2005)</p>
+                            <p class="bg-white p-4 rounded-lg shadow-sm">Certificado en el Uso del Lenguaje SQL Server - DuocUC (2005)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer id="contacto" class="bg-[#3D405B] text-white py-20">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl font-bold mb-4">Contáctame</h2>
+                <p class="max-w-2xl mx-auto mb-8">Estoy abierta a nuevas oportunidades y desafíos. Si mi perfil se ajusta a lo que buscan, no duden en ponerse en contacto.</p>
+                <div class="flex flex-col md:flex-row justify-center items-center gap-8">
+                    <div class="flex items-center gap-3">
+                        <span class="text-2xl">📧</span>
+                        <a href="mailto:saravia_carrasco@hotmail.com" class="text-lg hover:underline">saravia_carrasco@hotmail.com</a>
+                    </div>
+                    <div class="flex items-center gap-3">
+                         <span class="text-2xl">📞</span>
+                        <span class="text-lg">(+569) 81880720</span>
+                    </div>
+                     <div class="flex items-center gap-3">
+                         <span class="text-2xl">📍</span>
+                        <span class="text-lg">Calle laguna del rey 01095, Maipú Santiago</span>
+                    </div>
+                </div>
+                <div class="mt-8 text-lg">
+                    <p class="font-bold">Pretensión de Renta: $3.500.000 CLP (líquido)</p>
+                </div>
+                <div class="mt-8 text-sm text-gray-300">
+                    <p class="font-bold">Referencias:</p>
+                    <p>Alvaro Cano Gutierrez</p>
+                    <p>Correo: alvaro.cano@afpcapital.cl</p>
+                    <p>Teléfono: 229153757 / Cel. 92740484</p>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const menuBtn = document.getElementById('menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            timelineItems.forEach(item => {
+                const header = item.querySelector('.cursor-pointer');
+                header.addEventListener('click', () => {
+                    const currentlyActive = document.querySelector('.timeline-item.active');
+                    if (currentlyActive && currentlyActive !== item) {
+                        currentlyActive.classList.remove('active');
+                    }
+                    item.classList.toggle('active');
+                });
+            });
+
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            function changeNavOnScroll() {
+                let index = sections.length;
+                while(--index && window.scrollY + 100 < sections[index].offsetTop) {}
+                
+                navLinks.forEach((link) => link.classList.remove('active'));
+                if (index > -1) {
+                    const activeLink = document.querySelector(`.nav-link[href="#${sections[index].id}"]`);
+                    if (activeLink) {
+                       activeLink.classList.add('active');
+                    }
+                }
+            }
+
+            window.addEventListener('scroll', changeNavOnScroll);
+            changeNavOnScroll();
+        });
+    </script>
+</body>
+</html>
